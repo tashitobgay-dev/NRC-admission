@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norbuling Rigter College | Admissions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        nrcBlue: '#1a365d',
+                        nrcGold: '#d69e2e',
+                        nrcLight: '#f7fafc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Hero Image Overlay */
+        .hero-bg {
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.9)), 
+                        url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background-attachment: fixed;
+        }
+
+        /* Scroll Animations */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e2e8f0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 10px 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            right: -12px;
+            background-color: #d69e2e;
+            border: 4px solid white;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 0 4px rgba(214, 158, 46, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -12px;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            background-color: #1a365d;
+        }
+
+        /* Hover Cards */
+        .doc-card {
+            transition: all 0.3s ease;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #d69e2e;
+        }
+
+        /* Responsive Timeline */
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+            
+            .timeline-dot {
+                left: 19px !important;
+            }
+        }
+        
+        /* Floating Animation for Header Element */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-nrcGold rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="font-bold text-2xl text-white tracking-tight" id="nav-brand">NRC Admissions</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#procedure" class="text-white hover:text-nrcGold transition-colors font-medium">Procedure</a>
+                    <a href="#documents" class="text-white hover:text-nrcGold transition-colors font-medium">Documents</a>
+                    <a href="#apply" class="bg-nrcGold text-white px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 hover:shadow-lg transition-all transform hover:-translate-y-0.5">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-nrcBlue/90 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-block mb-6 animate-float">
+                <span class="bg-nrcGold/20 border border-nrcGold/50 text-nrcGold px-4 py-1.5 rounded-full text-sm font-semibold tracking-wider uppercase backdrop-blur-sm">
+                    Admissions Open 2026
+                </span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight reveal-element">
+                Begin Your Journey at <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-nrcGold to-yellow-300">Norbuling Rigter College</span>
+            </h1>
+            
+            <p class="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 reveal-element" style="transition-delay: 0.2s;">
+                Experience academic excellence amidst the breathtaking beauty of Paro valley. Shape your future in an environment designed for growth, innovation, and leadership.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal-element" style="transition-delay: 0.4s;">
+                <a href="#procedure" class="px-8 py-4 bg-white text-nrcBlue rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center gap-2 group">
+                    Explore Procedure 
+                    <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <a href="#apply" class="px-8 py-4 bg-nrcGold text-white rounded-full font-bold text-lg hover:bg-yellow-500 transition-colors shadow-lg shadow-nrcGold/30 flex items-center justify-center gap-2 group">
+                    Start Application
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <a href="#procedure" class="text-white/70 hover:text-white transition-colors">
+                <i class="fa-solid fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Admission Procedure Timeline Section -->
+    <section id="procedure" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-nrcGold font-bold tracking-wide uppercase text-sm mb-2">Step-by-Step Guide</h2>
+                <h3 class="text-4xl font-extrabold text-nrcBlue">Your Path to NRC</h3>
+                <div class="w-24 h-1 bg-nrcGold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="timeline-container mt-12">
+                <!-- Step 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 relative group overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -z-10 transition-transform group-hover:scale-150"></div>
+                        <div class="text-nrcGold text-4xl mb-4"><i class="fa-solid fa-laptop-file"></i></div>
+                        <h4 class="text-2xl font-bold text-nrcBlue mb-3">1. Online Application</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Start by creating an account on our admission portal. Fill out the comprehensive application form with your personal details, educational background, and program preferences.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 relative group overflow-hidden">
+                        <div class="absolute top-0 left-0 w-24 h-24 bg-yellow-50 rounded-br-full -z-10 transition-transform group-hover:scale-150"></div>
+                        <div class="text-nrcGold text-4xl mb-4"><i class="fa-solid fa-file-arrow-up"></i></div>
+                        <h4 class="text-2xl font-bold text-nrcBlue mb-3">2. Document Submission</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Upload high-quality scanned copies of all required documents. Ensure your academic transcripts, identification, and certificates meet our formatting guidelines.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 relative group overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -z-10 transition-transform group-hover:scale-150"></div>
+                        <div class="text-nrcGold text-4xl mb-4"><i class="fa-solid fa-comments"></i></div>
+                        <h4 class="text-2xl font-bold text-nrcBlue mb-3">3. Interview & Review</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Shortlisted candidates will be invited for an online or in-person interview. Our admissions committee will holistically review your application and interview performance.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 relative group overflow-hidden border-b-4 border-b-nrcGold">
+                        <div class="absolute top-0 left-0 w-24 h-24 bg-green-50 rounded-br-full -z-10 transition-transform group-hover:scale-150"></div>
+                        <div class="text-green-500 text-4xl mb-4"><i class="fa-solid fa-user-graduate"></i></div>
+                        <h4 class="text-2xl font-bold text-nrcBlue mb-3">4. Final Enrollment</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Receive your official offer letter. Complete the fee payment, confirm your seat, and get ready to join the vibrant student community at our Paro campus!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Required Documents Section -->
+    <section id="documents" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal-element">
+                <div class="max-w-2xl">
+                    <h2 class="text-nrcGold font-bold tracking-wide uppercase text-sm mb-2">Checklist</h2>
+                    <h3 class="text-4xl font-extrabold text-nrcBlue mb-4">Required Documents</h3>
+                    <p class="text-gray-600 text-lg">Please ensure you have digital copies of these documents ready before starting your application process.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <button class="bg-white text-nrcBlue border border-gray-300 px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Download Checklist PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Doc 1 -->
+                <div class="doc-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center reveal-element">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-nrcBlue text-2xl mb-6">
+                        <i class="fa-solid fa-scroll"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Class XII Transcripts</h4>
+                    <p class="text-gray-500 text-sm">Original mark sheets from recognized educational boards (BHSEC, CBSE, ISC, etc.)</p>
+                </div>
+
+                <!-- Doc 2 -->
+                <div class="doc-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center reveal-element" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-nrcBlue text-2xl mb-6">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">CID / Passport</h4>
+                    <p class="text-gray-500 text-sm">Clear copy of Citizenship Identity Card (for Bhutanese) or Passport (for International).</p>
+                </div>
+
+                <!-- Doc 3 -->
+                <div class="doc-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center reveal-element" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-nrcBlue text-2xl mb-6">
+                        <i class="fa-solid fa-camera-retro"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Recent Photographs</h4>
+                    <p class="text-gray-500 text-sm">Two recent passport-sized photographs with a white background.</p>
+                </div>
+
+                <!-- Doc 4 -->
+                <div class="doc-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center reveal-element" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-nrcBlue text-2xl mb-6">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">School Leaving Certificate</h4>
+                    <p class="text-gray-500 text-sm">Transfer certificate or character certificate from the last school attended.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="apply" class="relative py-24 bg-nrcBlue overflow-hidden">
+        <!-- Abstract Background shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-nrcGold rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center reveal-element">
+            <i class="fa-solid fa-paper-plane text-5xl text-nrcGold mb-6"></i>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Ready to Join NRC?</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                Take the first step towards a brilliant career. Our application process is streamlined, entirely online, and takes just about 15 minutes to complete.
+            </p>
+            
+            <div class="bg-white/10 p-2 rounded-full inline-flex flex-col sm:flex-row gap-2 backdrop-blur-md border border-white/20">
+                <input type="email" placeholder="Enter your email to start" class="bg-white px-6 py-4 rounded-full w-full sm:w-80 outline-none focus:ring-2 focus:ring-nrcGold text-gray-800">
+                <button onclick="startApplication()" class="bg-nrcGold hover:bg-yellow-500 text-white font-bold px-8 py-4 rounded-full transition-all flex items-center justify-center gap-2 group whitespace-nowrap">
+                    Apply Now 
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+            <p class="text-sm text-blue-200 mt-4"><i class="fa-solid fa-lock text-xs mr-1"></i> Your data is secure and encrypted.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
+                        <div class="w-8 h-8 bg-nrcGold rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                            <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">NRC</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Empowering minds in the heart of Paro, Bhutan.</p>
+                </div>
+                
+                <div class="text-gray-400 text-sm">
+                    <p><i class="fa-solid fa-envelope mr-2"></i> admissions@nrc.bt</p>
+                    <p class="mt-2"><i class="fa-solid fa-phone mr-2"></i> +975 8 271313</p>
+                    <p class="mt-2"><i class="fa-solid fa-location-dot mr-2"></i> Doteng Gewog, Paro, Bhutan</p>
+                </div>
+                
+                <div class="flex justify-center md:justify-end gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-nrcGold transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-nrcGold transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-nrcGold transition-colors">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                &copy; 2026 Norbuling Rigter College. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom interactive script for animations and layout behavior
+
+        // 1. Navigation Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const navBrand = document.getElementById('nav-brand');
+        const navLinks = navbar.querySelectorAll('a:not(.bg-nrcGold)');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navBrand.classList.replace('text-white', 'text-nrcBlue');
+                navLinks.forEach(link => {
+                    link.classList.replace('text-white', 'text-gray-700');
+                    link.classList.replace('hover:text-nrcGold', 'hover:text-nrcBlue');
+                });
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('bg-transparent', 'py-4');
+                navBrand.classList.replace('text-nrcBlue', 'text-white');
+                navLinks.forEach(link => {
+                    link.classList.replace('text-gray-700', 'text-white');
+                    link.classList.replace('hover:text-nrcBlue', 'hover:text-nrcGold');
+                });
+            }
+        });
+
+        // 2. Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: stop observing once revealed to keep it visible
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        // Observe general reveal elements
+        document.querySelectorAll('.reveal-element').forEach((el) => {
+            revealObserver.observe(el);
+        });
+
+        // Observe timeline items specifically for sequential loading
+        document.querySelectorAll('.timeline-item').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.2}s`;
+            revealObserver.observe(el);
+        });
+
+        // 3. Simple CTA Function
+        function startApplication() {
+            // Replace with actual modal or redirect logic
+            const emailInput = document.querySelector('input[type="email"]');
+            if(emailInput.value) {
+                // Creates a nice visual feedback without using forbidden 'alert'
+                const btn = document.querySelector('#apply button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+                btn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Redirecting...';
+                    // window.location.href = '/application-portal';
+                }, 1500);
+            } else {
+                emailInput.classList.add('ring-2', 'ring-red-500');
+                emailInput.placeholder = "Please enter email first!";
+                setTimeout(() => {
+                    emailInput.classList.remove('ring-2', 'ring-red-500');
+                    emailInput.placeholder = "Enter your email to start";
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
